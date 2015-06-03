@@ -18,6 +18,5 @@ platforms:
 suites:
   - name: default
     run_list:
-    run_list:
       - recipe[opera_test::default]
     attributes:

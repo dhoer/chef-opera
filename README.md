@@ -1,4 +1,4 @@
-# opera Cookbook
+# Opera Cookbook
 
 [![Cookbook Version](http://img.shields.io/cookbook/v/opera.svg?style=flat-square)][cookbook]
 [![Build Status](http://img.shields.io/travis/dhoer/chef-opera.svg?style=flat-square)][travis]
@@ -9,7 +9,7 @@
 [github]: https://github.com/dhoer/chef-opera/issues
                           
 This cookbook installs Chromium-based Opera browser (http://www.opera.com/) at compile time and provides 
-`opera_version` library method  to retrieve opera version installed.
+`opera_version` library method  to retrieve Opera browser version installed.
 
 ## Requirements
 
@@ -43,8 +43,8 @@ allow_any_instance_of(Chef::Recipe).to receive(:opera_version).and_return('29.0.
 
 ### Attributes
 
-- `node['opera']['version']` - Install latest stable, latest beta or specific version of Opera browser. 
-Default is `stable`.
+- `node['opera']['browser']['version']` - Install latest `stable`, latest `beta` or specific version 
+(e.g. '29.0.1795.60') of Opera browser. Default is `stable`.
 
 See [attributes/default.rb](https://github.com/dhoer/chef-opera/blob/master/attributes/default.rb) for complete list 
 of attributes.
