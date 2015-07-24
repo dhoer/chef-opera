@@ -11,4 +11,3 @@ supports 'ubuntu'
 supports 'windows'
 
 suggests 'apt', '~> 3.2'
-
