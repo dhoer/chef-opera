@@ -2,14 +2,13 @@ name 'opera'
 maintainer 'Dennis Hoer'
 maintainer_email 'dennis.hoer@gmail.com'
 license 'MIT'
-description 'Installs Opera applications'
+description 'Installs Opera browser'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '0.1.0'
+version '1.0.0'
 
 # supports 'mac_os_x'
 supports 'ubuntu'
-# supports 'windows'
+supports 'windows'
 
 suggests 'apt', '~> 3.2'
-# suggests 'dmg', '~> 2.2'
-# suggests 'windows', '~> 1.0'
+

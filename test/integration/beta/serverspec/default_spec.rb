@@ -11,7 +11,7 @@ end
 describe 'opera::default' do
   case os[:family]
   when 'windows'
-    describe file('C:\Program Files (x86)\Opera\installation_status.xml') do
+    describe file('C:\Program Files (x86)\Opera beta\installation_status.xml') do
       its(:content) { should match(%r{name="DisplayVersion" type="REG_SZ">(.*)<\/value>}) }
     end
   when 'darwin'
@@ -19,7 +19,7 @@ describe 'opera::default' do
       its(:stdout) { should match(/^[\d|.]*$/) }
     end
   else
-    describe command('opera --version') do
+    describe command('opera-beta --version') do
       its(:stdout) { should match(/^[\d|.]*$/) }
     end
   end

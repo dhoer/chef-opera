@@ -8,5 +8,3 @@ version '0.1.0'
 
 depends 'opera'
 depends 'apt'
-depends 'dmg'
-depends 'windows'
