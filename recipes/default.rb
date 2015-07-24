@@ -1,26 +1,25 @@
 require 'open-uri'
 
 version = node['opera']['browser']['version']
-path = version == 'beta' ? 'opera-beta' : 'opera/desktop'
-base_uri = "#{node['opera']['browser']['url']}/#{path}"
-
-if %w(stable beta).include?(version)
-  out = open(base_uri).read
-  version = out.scan(%r{<a href=.*>([\d|.]*)/</a>}).last.join('')
-end
+base_uri = "#{node['opera']['browser']['url']}/#{version}"
 
 case node['platform']
 when 'windows'
-  windows_package "Opera #{version}" do
-    source "#{base_uri}/#{version}/win/Opera_#{version}_Setup.exe"
-    installer_type :installshield
+  setup_exe = "#{Chef::Config[:file_cache_path]}/Opera_NI_#{version}.exe"
+
+  remote_file setup_exe do
+    source "#{base_uri}/windows"
     action :nothing
-  end.run_action(:install)
+  end.run_action(:create)
+
+  execute "#{setup_exe} /silent /launchopera=0 /import-browser-data=0 /setdefaultbrowser=0" do
+    action :nothing
+  end.run_action(:run)
 when 'mac_os_x'
   dmg_package 'Opera' do
     dmg_name "Opera_#{version}_Setup"
     accept_eula true
-    source "#{base_uri}/#{version}/mac/Opera_#{version}_Setup.dmg"
+    source "#{base_uri}/mac/Opera_#{version}_Setup.dmg"
     action :nothing
   end.run_action(:install)
 when 'ubuntu'
@@ -30,10 +29,10 @@ when 'ubuntu'
     components %w(non-free)
     key node['opera']['browser']['apt_key']
     action :nothing
+
   end.run_action(:add)
 
-  track = node['opera']['browser']['version'] == 'beta' ? 'beta' : 'stable'
-  package "opera-#{track}" do
+  package "opera-#{node['opera']['browser']['version']}" do
     action :nothing
   end.run_action(:install)
 else
