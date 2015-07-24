@@ -1,11 +1,9 @@
-require 'open-uri'
-
-version = node['opera']['browser']['version']
-base_uri = "#{node['opera']['browser']['url']}/#{version}"
+track = node['opera']['track']
+base_uri = "#{node['opera']['url']}/#{track}"
 
 case node['platform']
 when 'windows'
-  setup_exe = "#{Chef::Config[:file_cache_path]}/Opera_NI_#{version}.exe"
+  setup_exe = "#{Chef::Config[:file_cache_path]}/Opera_NI_#{track}.exe"
 
   remote_file setup_exe do
     source "#{base_uri}/windows"
@@ -17,24 +15,23 @@ when 'windows'
   end.run_action(:run)
 when 'mac_os_x'
   dmg_package 'Opera' do
-    dmg_name "Opera_#{version}_Setup"
+    dmg_name "Opera_#{track}_Setup"
     accept_eula true
-    source "#{base_uri}/mac/Opera_#{version}_Setup.dmg"
+    source "#{base_uri}/mac/Opera_#{track}_Setup.dmg"
     action :nothing
   end.run_action(:install)
 when 'ubuntu'
   apt_repository 'opera' do
-    uri node['opera']['browser']['apt_uri']
+    uri node['opera']['apt_uri']
     distribution 'stable'
     components %w(non-free)
-    key node['opera']['browser']['apt_key']
+    key node['opera']['apt_key']
     action :nothing
-
   end.run_action(:add)
 
-  package "opera-#{node['opera']['browser']['version']}" do
+  package "opera-#{track}" do
     action :nothing
   end.run_action(:install)
 else
-  Chef::Log.warn('Opera cannot be installed on this platform using this cookbook.')
+  log('Opera cannot be installed on this platform using this cookbook!') { level :warn }
 end

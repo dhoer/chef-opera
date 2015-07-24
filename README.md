@@ -18,6 +18,7 @@ Chef 11.14 or higher.
 ### Platforms
 
 - Ubuntu
+- Windows
 
 ### Cookbooks
 
@@ -43,8 +44,7 @@ allow_any_instance_of(Chef::Recipe).to receive(:opera_version).and_return('29.0.
 
 ### Attributes
 
-- `node['opera']['browser']['version']` - Install latest `stable` or `beta` release of Opera browser.
-On Mac OS X and Windows platforms you can also specify a specific version (e.g. '29.0.1795.60').  Default is `stable`.
+- `node['opera']['track']` - Install latest `stable` or `beta` release of Opera browser. Default is `stable`.
 
 See [attributes/default.rb](https://github.com/dhoer/chef-opera/blob/master/attributes/default.rb) for complete list 
 of attributes.
