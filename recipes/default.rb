@@ -14,12 +14,12 @@ when 'windows'
     action :nothing
   end.run_action(:run)
 when 'mac_os_x'
-  dmg_package 'Opera' do
-    dmg_name "Opera_#{track}_Setup"
-    accept_eula true
-    source "#{base_uri}/mac/Opera_#{track}_Setup.dmg"
+  setup_exe = "#{Chef::Config[:file_cache_path]}/Opera_NI_#{track}.zip"
+
+  remote_file setup_exe do
+    source "#{base_uri}/mac"
     action :nothing
-  end.run_action(:install)
+  end.run_action(:create)
 when 'ubuntu'
   apt_repository 'opera' do
     uri node['opera']['apt_uri']
@@ -33,5 +33,5 @@ when 'ubuntu'
     action :nothing
   end.run_action(:install)
 else
-  log('Opera cannot be installed on this platform using this cookbook!') { level :warn }
+  log('Opera cannot be installed on this platform using this cookbook!') { 'level :warn' }
 end

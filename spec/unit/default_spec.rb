@@ -17,11 +17,14 @@ describe 'opera_test::default' do
     end
   end
 
-  context 'dmg' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'mac_os_x', version: '10.10').converge(described_recipe) }
+  context 'macosx' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(
+        platform: 'mac_os_x', version: '10.10', file_cache_path: '/var/chef/cache').converge(described_recipe)
+    end
 
-    it 'installs opera' do
-      expect(chef_run).to install_dmg_package('Opera')
+    it 'downloads opera' do
+      expect(chef_run).to create_remote_file('/var/chef/cache/Opera_NI_stable.zip')
     end
   end
 

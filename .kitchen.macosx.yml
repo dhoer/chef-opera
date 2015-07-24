@@ -19,4 +19,12 @@ suites:
   - name: default
     run_list:
       - recipe[opera_test::default]
+      - recipe[opera_test::version]
     attributes:
+  - name: beta
+    run_list:
+      - recipe[opera_test::default]
+      - recipe[opera_test::version]
+    attributes:
+      opera:
+        track: beta
