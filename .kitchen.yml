@@ -16,6 +16,7 @@ platforms:
   - name: windows-2012r2
     driver:
       box: dhoer/windows-2012r2
+  - name: macosx-10.10.4
 
 suites:
   - name: default

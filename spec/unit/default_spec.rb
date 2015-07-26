@@ -26,6 +26,16 @@ describe 'opera_test::default' do
     it 'downloads opera' do
       expect(chef_run).to create_remote_file('/var/chef/cache/Opera_NI_stable.zip')
     end
+
+    it 'unzips opera' do
+      expect(chef_run).to run_execute(
+        'unzip -o /var/chef/cache/Opera_NI_stable.zip')
+    end
+
+    it 'installs opera' do
+      expect(chef_run).to run_execute(
+        '"/var/chef/cache/Opera Installer.app/Contents/MacOS/Opera Installer" -silent')
+    end
   end
 
   context 'ubuntu' do
@@ -43,7 +53,7 @@ describe 'opera_test::default' do
   context 'other' do
     let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
 
-    it 'logs not supported warning' do
+    it 'logs warning' do
       expect(chef_run).to write_log('Opera cannot be installed on this platform using this cookbook!')
     end
   end

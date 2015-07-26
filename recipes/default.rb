@@ -20,6 +20,15 @@ when 'mac_os_x'
     source "#{base_uri}/mac"
     action :nothing
   end.run_action(:create)
+
+  execute "unzip -o #{setup_exe}" do
+    cwd Chef::Config[:file_cache_path]
+    action :nothing
+  end.run_action(:run)
+
+  execute "\"#{Chef::Config[:file_cache_path]}/Opera Installer.app/Contents/MacOS/Opera Installer\" -silent" do
+    action :nothing
+  end.run_action(:run)
 when 'ubuntu'
   apt_repository 'opera' do
     uri node['opera']['apt_uri']
