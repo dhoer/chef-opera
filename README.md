@@ -2,18 +2,16 @@
 
 [![Cookbook Version](http://img.shields.io/cookbook/v/opera.svg?style=flat-square)][cookbook]
 [![Build Status](http://img.shields.io/travis/dhoer/chef-opera.svg?style=flat-square)][travis]
-[![GitHub Issues](http://img.shields.io/github/issues/dhoer/chef-opera.svg?style=flat-square)][github]
 
 [cookbook]: https://supermarket.chef.io/cookbooks/opera
 [travis]: https://travis-ci.org/dhoer/chef-opera
-[github]: https://github.com/dhoer/chef-opera/issues
                           
 This cookbook installs Chromium-based Opera browser (http://www.opera.com/) at compile time and provides 
 `opera_version` library method  to retrieve Opera browser version installed.
 
 ## Requirements
 
-Chef 11.14 or higher.
+Chef 11.16+
 
 ### Platforms
 
@@ -21,8 +19,6 @@ Chef 11.14 or higher.
 - Windows
 
 ### Cookbooks
-
-These cookbooks are referenced with suggests, so be sure to depend on the cookbooks that apply.
 
 - apt
 
