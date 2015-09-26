@@ -10,7 +10,7 @@ version '1.1.0'
 supports 'ubuntu'
 supports 'windows'
 
-depends 'apt', '~> 3.2'
+depends 'apt', '~> 2.8'
 
 source_url 'https://github.com/dhoer/chef-opera' if respond_to?(:source_url)
 issues_url 'https://github.com/dhoer/chef-opera/issues' if respond_to?(:issues_url)
